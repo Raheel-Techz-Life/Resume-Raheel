@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scan Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+  <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-[600px]">
+    <h1 class="text-2xl font-bold mb-6">📑 Scan Report for {{ result.url }}</h1>
+
+    {% if result.error %}
+      <p class="text-red-400 font-semibold">{{ result.error }}</p>
+    {% else %}
+      <p class="mb-4">🔐 HTTPS Enabled: 
+        <span class="{{ 'text-green-400' if result.https else 'text-red-400' }}">
+          {{ result.https }}
+        </span>
+      </p>
+
+      <h2 class="text-xl font-semibold mb-2">Security Headers:</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        {% for header, value in result.headers.items() %}
+          <li><span class="font-bold">{{ header }}</span>: {{ value }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <a href="/" class="inline-block mt-6 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">← Back</a>
+  </div>
+</body>
+</html>

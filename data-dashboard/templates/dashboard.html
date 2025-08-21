@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen p-10">
+  <div class="bg-gray-800 p-8 rounded-2xl shadow-lg">
+    <h1 class="text-2xl font-bold mb-6">📊 Data Dashboard</h1>
+
+    <div class="overflow-x-auto mb-10">
+      <table class="table-auto border-collapse border border-gray-700 w-full">
+        <thead>
+          <tr class="bg-gray-700">
+            {% for col in columns %}
+              <th class="border border-gray-600 px-4 py-2">{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in data %}
+          <tr class="hover:bg-gray-700">
+            {% for col in columns %}
+              <td class="border border-gray-600 px-4 py-2">{{ row[col] }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-4">Example Visualization</h2>
+    <canvas id="chart" class="bg-white rounded-lg p-4"></canvas>
+
+    <a href="/" class="inline-block mt-6 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">← Back</a>
+  </div>
+
+  <script>
+    const ctx = document.getElementById("chart").getContext("2d");
+    const chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: {{ columns|tojson }},
+            datasets: [{
+                label: "First Row Data",
+                data: {{ data[0].values()|list|tojson }},
+                borderWidth: 1,
+                backgroundColor: "rgba(59, 130, 246, 0.7)"
+            }]
+        }
+    });
+  </script>
+</body>
+</html>
