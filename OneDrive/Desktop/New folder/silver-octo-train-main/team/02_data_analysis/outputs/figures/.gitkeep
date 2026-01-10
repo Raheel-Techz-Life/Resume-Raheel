@@ -1,0 +1,9 @@
+# Figures Output Directory
+
+Place all generated visualizations here:
+- `temporal_trends.png`
+- `geographic_analysis.png`
+- `age_distribution.png`
+- etc.
+
+**Owner:** @Raheel-Techz-Life
