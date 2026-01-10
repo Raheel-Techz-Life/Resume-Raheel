@@ -1,0 +1,9 @@
+# Processed Data Output Directory
+
+Place all processed/cleaned data files here:
+- `cleaned_enrolment.csv`
+- `state_aggregates.csv`
+- `anomalies.csv`
+- etc.
+
+**Owner:** @Raheel-Techz-Life
