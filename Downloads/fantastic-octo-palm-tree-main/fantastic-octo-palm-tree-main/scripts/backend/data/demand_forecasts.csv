@@ -1,0 +1,1 @@
+forecast_id,district_id,category,current_demand,predicted_demand,forecast_period,confidence,growth_rate,factors,created_at
