@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects Dossier — Raheel Hosmani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050810;--bg2:#080d1a;--bg3:#0d1426;--surface:#0f1830;--surface2:#141f3a;--accent:#00d4ff;--accent2:#7b5ea7;--accent3:#ff6b35;--text:#e8eaf2;--text2:#8892aa;--text3:#4a5568;--border:rgba(0,212,255,.12);--border2:rgba(0,212,255,.06);--glow:rgba(0,212,255,.15);--mono:'Space Mono',monospace;--display:'Syne',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--display);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+#cursor {
+    position: fixed; top: 0; left: 0; width: 12px; height: 12px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    mix-blend-mode: screen;
+  }
+  #cursor-ring {
+    position: fixed; top: 0; left: 0; width: 36px; height: 36px;
+    border: 1px solid rgba(0,212,255,0.4); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+body:has(a:hover) #cursor, body:has(button:hover) #cursor, body:has(.card:hover) #cursor { transform: translate(-50%,-50%) scale(2.5); }
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.4}body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(5,8,16,.95) 0%,transparent 100%);backdrop-filter:blur(12px);border-bottom:1px solid var(--border2)}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--accent);text-decoration:none;letter-spacing:.1em;display:flex;align-items:center;gap:8px}.nav-logo span{color:var(--text2)}
+.nav-links{display:flex;gap:36px;list-style:none}.nav-links a{font-family:var(--mono);font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .2s;position:relative}.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s ease}.nav-links a:hover{color:var(--accent)}.nav-links a:hover::after{width:100%}.nav-links a.active{color:var(--accent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}main{max-width:1100px;margin:0 auto;padding:120px 60px 90px;position:relative;z-index:2;text-align:center}
+.kicker{font-family:var(--mono);color:var(--accent);font-size:12px;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px;opacity:0;animation:fadeUp .8s ease .2s forwards}.kicker::before{content:'';width:40px;height:1px;background:var(--accent)}
+h1{font-size:clamp(52px,8vw,112px);font-weight:800;line-height:.9;letter-spacing:-.03em;margin-bottom:8px;opacity:0;animation:fadeUp .8s ease .35s forwards}h1 span{color:var(--accent)}.lead{max-width:560px;color:var(--text2);font-family:var(--mono);font-size:14px;line-height:1.8;margin:32px auto 48px;opacity:0;animation:fadeUp .8s ease .5s forwards;text-align:center}
+.grid{margin-top:34px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px;opacity:0;animation:fadeUp .8s ease .65s forwards;text-align:left}
+.card{border:1px solid var(--border2);padding:32px;position:relative;overflow:hidden;transition:all .3s;background:linear-gradient(135deg,var(--surface) 0%,var(--bg3) 100%);cursor:pointer}
+.card:hover{border-color:var(--border)}
+.card::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(0,212,255,.04) 0%,transparent 70%);transition:opacity .4s;opacity:0}
+.card:hover::after{opacity:1}
+.card::before{content:attr(data-id);position:absolute;right:16px;bottom:12px;font-family:var(--mono);font-size:34px;color:rgba(255,255,255,.05);font-weight:700}
+.card h2{font-size:23px;margin-bottom:8px}.meta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:12px}
+.card p{font-family:var(--mono);font-size:12px;color:var(--text2);line-height:1.85}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 10px}.tag{font-family:var(--mono);font-size:10px;padding:4px 8px;border:1px solid var(--border);color:var(--text2)}
+.tech-panel{margin-top:10px;background:rgba(0,0,0,.28);border:1px solid rgba(0,212,255,.16);padding:12px}
+.code{font-family:var(--mono);font-size:11px;color:#9deeff;line-height:1.7;white-space:pre-wrap}
+footer{padding:20px 24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text2);text-align:center}
+.status-dot{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:#00ff88}.status-dot::before{content:'';width:6px;height:6px;background:#00ff88;border-radius:50%;animation:pulse-green 2s ease-in-out infinite}@keyframes pulse-green{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.4)}50%{box-shadow:0 0 0 6px rgba(0,255,136,0)}}
+.card.expanded .project-details {
+    max-height: 3000px; /* Adjust to fit content */
+    opacity: 1;
+    padding-top: 24px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border2);
+}
+
+.project-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s ease, margin-top 0.5s ease, padding-top 0.5s ease;
+    text-align: left;
+}
+
+.project-details h3 {
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-family: var(--mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.detail-block h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.detail-block p, .detail-block ul {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.8;
+}
+
+.detail-block ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.detail-block li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.detail-block li::before {
+    content: '»';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+.tech-stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 4px;
+    color: var(--text2);
+}
+
+</style>
+</head>
+<body>
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="index9.html" class="nav-logo">
+    Rhlz
+  </a>
+  <ul class="nav-links">
+    <li><a class="active" href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="achievements.html">Awards</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <span class="status-dot">Available for opportunities</span>
+</nav>
+<main>
+  <div class="kicker">Detailed Section / Projects</div>
+  <h1>Project <span style="color:var(--accent)">Dossier</span></h1>
+  <p class="lead">Expanded technical snapshots of core builds, with architecture flavor, stack decisions, and deployment intent. Same visual system, deeper engineering narrative.</p>
+
+  <div class="grid">
+    <article class="card" data-id="01" id="project-samvidhan">
+      <h2>SAMVIDHAN</h2>
+      <div class="meta">UIDAI Data Hackathon 2026 · Flagship AI Platform</div>
+      <p>Identity-intelligence suite designed for Aadhaar-scale governance analytics. Target profile: sub-500ms response pipelines, privacy-preserving access patterns, and auditable fraud insights across high-volume citizen records.</p>
+      <div class="tags">
+        <span class="tag">Next.js 16</span><span class="tag">FastAPI</span><span class="tag">Python 3.11</span><span class="tag">RBAC</span><span class="tag">Differential Privacy</span>
+      </div>
+      <div class="tech-panel"><div class="code">frameworks = ["ADIF", "IRF", "AFIF", "PROF", "AMF", "PPAF"]
+SLO = {"p95_latency_ms": 500, "auditability": "strict", "privacy_mode": "enabled"}</div></div>
+      <div class="project-details">
+        <div class="detail-grid">
+            <div class="detail-block">
+                <h4>Overview</h4>
+                <p>Powered by 6 AI frameworks for governance intelligence, citizen privacy, and policy optimization. Serves 1.4 billion+ citizens with fraud detection, data integrity verification, and privacy-preserving analytics. Features differential privacy, federated analytics, and real-time anomaly detection with 40+ API endpoints.</p>
+            </div>
+            <div class="detail-block">
+                <h4>Key Features</h4>
+                <ul>
+                    <li>6 Intelligence Frameworks (ADIF, IRF, AFIF, PROF, AMF, PPAF)</li>
+                    <li>40+ FastAPI endpoints with complete API documentation</li>
+                    <li>Fraud detection & anomaly analysis with geospatial tracking</li>
+                    <li>Differential privacy & federated analytics</li>
+                </ul>
+            </div>
+        </div>
+        <h3>Technology Stack</h3>
+        <div class="tech-stack-grid">
+            <span class="tech-tag">Next.js 16</span>
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">AI/ML</span>
+            <span class="tech-tag">Privacy Tech</span>
+            <span class="tech-tag">Government Tech</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-id="02" id="project-aqi">
+      <h2>Delhi AQI Monitor</h2>
+      <div class="meta">Smart India Hackathon 2025 · Environmental Intelligence</div>
+      <p>Real-time dashboard and predictive layer for Delhi-NCR stations. Includes 24-hour forecast trendline, cross-station comparison, and source-level contribution cues for decision support.</p>
+      <div class="tags">
+        <span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">Mapbox</span><span class="tag">Recharts</span>
+      </div>
+      <div class="tech-panel"><div class="code">ingest -> clean -> feature_window -> forecast_model -> map_overlay -> alert_panel</div></div>
+      <div class="project-details">
+        <p>Detailed information about the Delhi AQI Monitor project will go here.</p>
+      </div>
+    </article>
+
+    <article class="card" data-id="03" id="project-asha">
+      <h2>ASHA Sync Pro</h2>
+      <div class="meta">SIH 2025 · Offline-First Rural Healthcare</div>
+      <p>PWA focused on low-connectivity healthcare workflows for ASHA workers. Core priorities: uninterrupted local capture, multilingual voice inputs, sync reliability, and low-friction usability in the field.</p>
+      <div class="tags">
+        <span class="tag">IndexedDB</span><span class="tag">Service Workers</span><span class="tag">Web Speech API</span><span class="tag">PWA</span>
+      </div>
+      <div class="tech-panel"><div class="code">queue.push(formPayload)
+if (network.online) syncEngine.flush(queue)
+else cache.persist(queue)</div></div>
+      <div class="project-details">
+        <p>Detailed information about the ASHA Sync Pro project will go here.</p>
+      </div>
+    </article>
+
+    <article class="card" data-id="04" id="project-onest">
+      <h2>Zero-Barrier Jobs</h2>
+      <div class="meta">ONEST Hackathon 2025 · 3rd Place</div>
+      <p>Voice-first employability access layer for users with low literacy constraints. Missed-call and IVR driven flow, multilingual routing, and WhatsApp bridge to improve application completion rates.</p>
+      <div class="tags">
+        <span class="tag">ONEST</span><span class="tag">BHASHINI</span><span class="tag">IVR</span><span class="tag">WhatsApp API</span>
+      </div>
+      <div class="tech-panel"><div class="code">phone_call -> intent_detect -> language_route -> profile_capture -> job_match -> confirmation</div></div>
+      <div class="project-details">
+        <p>Detailed information about the Zero-Barrier Jobs project will go here.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Raheel Hosmani — Hubli, Karnataka, India</div>
+  <div class="footer-right">Built with intent · <span>No templates used</span></div>
+</footer>
+
+<script>
+  // ── CURSOR ──
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor() {
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // ── CARD TILT ──
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(800px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateZ(4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // -- PROJECT EXPAND --
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('expanded');
+    });
+  });
+</script>
+</body>
+</html>
