@@ -1,22 +1,6 @@
 export default function Home() {
   return (
     <main>
-      
-
-{/*  Loading Screen  */}
-<div className="loading-overlay">
-  <div className="loader-content">
-    <div className="loader-logo">
-      <span className="loader-letter">R</span>
-      <span className="loader-letter">H</span>
-      <span className="loader-letter">L</span>
-      <span className="loader-letter">Z</span>
-    </div>
-    <div className="loader-bar"></div>
-    <div className="loader-text">Initializing Experience</div>
-    <div className="loader-status">[ STANDBY ]</div>
-  </div>
-</div>
 
 {/*  Custom Cursor  */}
 
